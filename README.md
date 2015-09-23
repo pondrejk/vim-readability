@@ -18,6 +18,7 @@ Plug-in requires the [textstat](<https://pypi.python.org/pypi/textstat/>) python
 
         " .vimrc
         Bundle 'pondrejk/vim-readability'
+
 ## Usage
 
 To initialize the sign column:
