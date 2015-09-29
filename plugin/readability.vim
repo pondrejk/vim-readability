@@ -78,14 +78,20 @@ fun! FleschKincaidGrade(inTxt)
 
 import vim
 from textstat.textstat import textstat
+import re
+
 inTxt = vim.eval("a:inTxt")
+unwanted = re.compile(r'\<filename>(.*?)\</filename>|\<command>(.*?)\</command>|\<option>(.*?)\<option>|\<package>(.*?)\</package>|\<screen>(.*?)\</screen>|\<synopsis>(.*?)\</synopsis>|\<xref(.*?)/>|\<ulink(.*?)\</ulink>')
 
 if (textstat.sentence_count(inTxt) == 0):
   index = 0
 elif (textstat.flesch_kincaid_grade(inTxt) <= 0):
   index = 0
 else:
-  index = textstat.flesch_kincaid_grade(inTxt)
+  stripped = re.sub(unwanted, "", inTxt)
+  stripped = re.sub("<.*?>", "", stripped)
+  if (textstat.sentence_count(stripped) != 0):
+    index = textstat.flesch_kincaid_grade(stripped)
 
 index = int(index)
 vim.command("let g:funreturn="+str(index))
