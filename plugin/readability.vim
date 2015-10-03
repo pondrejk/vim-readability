@@ -41,6 +41,14 @@ fun! ReadGradeDisable()
   call winrestview(l:winview)
 endf
 
+fun! ReadGradeToggle()
+  if g:gutterOn == 1
+    call ReadGradeDisable()
+  else
+    call ReadGradeEnable()
+  endif
+endf
+
 " classification and placing signs
 fun! PlaceLoop()
   let curr_line = getline('.')
@@ -102,3 +110,4 @@ endf
 " user commands
 command! ReadGradeOn call ReadGradeEnable()
 command! ReadGradeOff call ReadGradeDisable()
+command! ReadGradeToggle call ReadGradeToggle()
