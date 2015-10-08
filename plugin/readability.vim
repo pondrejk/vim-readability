@@ -8,8 +8,16 @@
 "==============================================================================
 
 if exists('g:read_loaded') || &cp || version < 700
-    finish
+  finish
 endif
+
+call WhichPython()
+let has_py3 = g:py3
+if has_py3 == 0
+  echo "No support for Python 3, sorry."
+  finish
+endif
+
 let g:read_loaded = 1
 
 " sign column active?
@@ -103,6 +111,17 @@ else:
 
 index = int(index)
 vim.command("let g:funreturn="+str(index))
+
+endpython
+endf
+
+" determine if vim was built with py3
+fun! WhichPython()
+  python << endpython
+ 
+import vim
+has3 = vim.eval("has('python3')")
+vim.command("let g:py3="+str(has3))
 
 endpython
 endf

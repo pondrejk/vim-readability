@@ -29,6 +29,12 @@ To turn it off:
 
 > :ReadGradeOff
 
+## Notes & known issues
+
+* readability metrics provided by textstat are designed for English only
+* no textstat for Python 3, see issue#1, investigating possibilities 
+* right now, there is just one sign collumn in vim, so if you use git-gutter or similar plugin, vim-readability will overwrite signs made by these plug-ins, sorry
+
 ## TODO
 
 * handle xml markup, blacklist certain text elements that skew the results (URLs, commands, file paths...)
