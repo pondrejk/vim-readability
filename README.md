@@ -1,7 +1,7 @@
 vim-readability
 =================
 
-A Vim plug-in that calculates the [Flesch-Kincaid readability grade](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests) for every line in your document an displays the result in the sign column.
+A Vim plug-in that calculates the [Flesch-Kincaid readability grade](https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests) for every line in your document and displays the result in the sign column.
 
 ## Dependencies
 

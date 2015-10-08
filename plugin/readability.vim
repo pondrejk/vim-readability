@@ -1,6 +1,6 @@
 "==============================================================================
 "Script Title: Readability per line
-"Script Version: 0.0.1
+"Script Version: 0.1.0
 "Author: Peter Ondrejka
 "User Commands:
 "	:ReadGradeOn
