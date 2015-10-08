@@ -5,16 +5,10 @@
 "User Commands:
 "	:ReadGradeOn
 "	:ReadGradeOff
+"	:ReadGradeToggle
 "==============================================================================
 
 if exists('g:read_loaded') || &cp || version < 700
-  finish
-endif
-
-call WhichPython()
-let has_py3 = g:py3
-if has_py3 == 0
-  echo "No support for Python 3, sorry."
   finish
 endif
 
@@ -88,42 +82,25 @@ fun! UnplaceLoop()
   execute 'sign unplace '.line(".").' buffer='.winbufnr(0)
 endf
 
-" python function that calculates the index
+" ruby function that calculates the index
 fun! FleschKincaidGrade(inTxt)
-  python << endpython
+  ruby << EOF
 
-import vim
-from textstat.textstat import textstat
-import re
+require 'odyssey'
 
-inTxt = vim.eval("a:inTxt")
-unwanted = re.compile(r'\<filename>(.*?)\</filename>|\<command>(.*?)\</command>|\<option>(.*?)\<option>|\<package>(.*?)\</package>|\<screen>(.*?)\</screen>|\<synopsis>(.*?)\</synopsis>|\<xref(.*?)/>|\<ulink(.*?)\</ulink>')
+inTxt = VIM::evaluate("a:inTxt")
+report = Odyssey.Flesch_kincaid_GL(inTxt, true)
 
-if (textstat.sentence_count(inTxt) == 0):
-  index = 0
-elif (textstat.flesch_kincaid_grade(inTxt) <= 0):
-  index = 0
-else:
-  stripped = re.sub(unwanted, "", inTxt)
-  stripped = re.sub("<.*?>", "", stripped)
-  if (textstat.sentence_count(stripped) != 0):
-    index = textstat.flesch_kincaid_grade(stripped)
+if report["string_length"] == 0 or report["sentence_count"] == 0 or report["syllable_count"] == 0 or report["letter_count"] == 0 or report["word_count"] == 0 or report["average_words_per_sentence"] == 1 then
+  score = 0
+else 
+  score = report["score"]
+end
 
-index = int(index)
-vim.command("let g:funreturn="+str(index))
+score = Integer(score)
+VIM.command("let g:funreturn="+String(score))
 
-endpython
-endf
-
-" determine if vim was built with py3
-fun! WhichPython()
-  python << endpython
- 
-import vim
-has3 = vim.eval("has('python3')")
-vim.command("let g:py3="+str(has3))
-
-endpython
+EOF
 endf
 
 " user commands

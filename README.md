@@ -5,7 +5,7 @@ A Vim plug-in that calculates the [Flesch-Kincaid readability grade](https://en.
 
 ## Dependencies
 
-Plug-in requires the [textstat](<https://pypi.python.org/pypi/textstat/>) python library for calculating the index.
+Plug-in requires the [odyssey](<https://github.com/cameronsutter/odyssey>) ruby library for calculating the index.
 
 ## Installation
 
@@ -29,14 +29,20 @@ To turn it off:
 
 > :ReadGradeOff
 
+There is also the `:ReadGradeToggle` command you can map to a selected key in your .vimrc, for example:
+
+```Vim
+nmap <silent> <F11> :ReadGradeToggle<CR>
+imap <silent> <F11> <ESC>:ReadGradeToggle<CR>
+cmap <silent> <F11> <ESC>:ReadGradeToggle<CR>
+```
+
 ## Notes & known issues
 
-* readability metrics provided by textstat are designed for English only
-* no textstat for Python 3, see issue#1, investigating possibilities 
-* right now, there is just one sign collumn in vim, so if you use git-gutter or similar plugin, vim-readability will overwrite signs made by these plug-ins, sorry
+* readability metrics provided by odyssey are designed for English only
+* right now, there is just one sign column in Vim, so if you use git-gutter or similar plug-in, vim-readability will overwrite signs made by these plug-ins, sorry
 
 ## TODO
 
-* handle xml markup, blacklist certain text elements that skew the results (URLs, commands, file paths...)
-* implement other readability metrics provided by textstat
+* implement other readability metrics provided by odyssey
 * customization and autorefresh
