@@ -16,16 +16,20 @@ let g:read_loaded = 1
 
 " sign column active?
 let gutterOn = 0
+let g:readability_onsave = 0
 
 " setting highlight groups
-execute "highlight hlDumb guifg=#000000 guibg=#41ae76"
-execute "highlight hlEasy guifg=#000000 guibg=#238b45"
-execute "highlight hlMedium guifg=#000000 guibg=#006d2c"
-execute "highlight hlHard guifg=#000000 guibg=#ff6666"
-execute "highlight hlBloat guifg=#000000 guibg=#ff0000"
+fun! SetHlGroups()
+  execute "highlight hlDumb guifg=#000000 guibg=#41ae76"
+  execute "highlight hlEasy guifg=#000000 guibg=#238b45"
+  execute "highlight hlMedium guifg=#000000 guibg=#006d2c"
+  execute "highlight hlHard guifg=#000000 guibg=#ff6666"
+  execute "highlight hlBloat guifg=#000000 guibg=#ff0000"
+endf
 
 " iterate lines for sign placement
 fun! ReadGradeEnable()
+  call SetHlGroups()
   let l:winview = winsaveview()
   if g:gutterOn == 1
     call ReadGradeDisable()
@@ -93,8 +97,11 @@ report = Odyssey.Flesch_kincaid_GL(inTxt, true)
 
 if report["string_length"] == 0 or report["sentence_count"] == 0 or report["syllable_count"] == 0 or report["letter_count"] == 0 or report["word_count"] == 0 or report["average_words_per_sentence"] == 1 then
   score = 0
-else 
+else if report["score"] < -9
+  score = 0
+else
   score = report["score"]
+end
 end
 
 score = Integer(score)
@@ -107,3 +114,11 @@ endf
 command! ReadGradeOn call ReadGradeEnable()
 command! ReadGradeOff call ReadGradeDisable()
 command! ReadGradeToggle call ReadGradeToggle()
+
+" autorun on save -- how to turn off by default?
+if g:readability_onsave
+  autocmd! BufWritePost,FileChangedShellPost * 
+        \  if g:gutterOn == 1 |
+        \   call ReadGradeEnable() |
+        \  endif
+endif

@@ -37,6 +37,12 @@ imap <silent> <F11> <ESC>:ReadGradeToggle<CR>
 cmap <silent> <F11> <ESC>:ReadGradeToggle<CR>
 ```
 
+To automatically update the column on buffer save (disabled by default), put this into your .vimrc:
+
+```Vim
+let g:readability_onsave = 0
+```
+
 ## Notes & known issues
 
 * readability metrics provided by odyssey are designed for English only
