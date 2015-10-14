@@ -12,6 +12,10 @@ if exists('g:read_loaded') || &cp || version < 700
   finish
 endif
 
+if &hls
+  let g:is_hlsearch = 1
+endif
+
 let g:read_loaded = 1
 
 " sign column active?
@@ -30,6 +34,9 @@ endf
 " iterate lines for sign placement
 fun! ReadGradeEnable()
   call SetHlGroups()
+  if g:is_hlsearch
+    set nohls
+  endif
   let l:winview = winsaveview()
   if g:gutterOn == 1
     call ReadGradeDisable()
@@ -37,14 +44,23 @@ fun! ReadGradeEnable()
   :g/.*/call PlaceLoop()
   let g:gutterOn = 1
   call winrestview(l:winview)
+  if g:is_hlsearch
+    set hls
+  endif
 endf
 
 " iterate lines for sign removal
 fun! ReadGradeDisable()
+  if g:is_hlsearch
+    set nohls
+  endif
   let l:winview = winsaveview()
   :g/.*/call UnplaceLoop()
   let g:gutterOn = 0
   call winrestview(l:winview)
+  if g:is_hlsearch
+    set hls
+  endif
 endf
 
 fun! ReadGradeToggle()
