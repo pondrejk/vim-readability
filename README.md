@@ -43,6 +43,28 @@ To automatically update the column on buffer save (disabled by default), put thi
 let g:readability_onsave = 0
 ```
 
+To customize colors used in GUI, set the following variables in your .vimrc (default values displayed here):
+
+```Vim
+let g:read_guifg = "#000000"
+let g:read_guibg_dumb="#41ae76"
+let g:read_guibg_easy="#238b45"
+let g:read_guibg_medium="#006d2c"
+let g:read_guibg_hard="#ff6666"
+let g:read_guibg_bloat="#ff0000"
+```
+
+Similarly for the console colors:
+
+```Vim
+let g:read_ctermfg = "Black"
+let g:read_ctermbg_dumb="LightGreen"
+let g:read_ctermbg_easy="Green"
+let g:read_ctermbg_medium="DarkGreen"
+let g:read_ctermbg_hard="LightMagenta"
+let g:read_ctermbg_bloat="Red"
+```
+
 ## Notes & known issues
 
 * readability metrics provided by odyssey are designed for English only
