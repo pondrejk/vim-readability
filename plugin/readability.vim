@@ -22,13 +22,29 @@ let g:read_loaded = 1
 let gutterOn = 0
 let g:readability_onsave = 0
 
+" coloring -- GUI
+let g:read_guifg = "#000000"
+let g:read_guibg_dumb="#41ae76"
+let g:read_guibg_easy="#238b45"
+let g:read_guibg_medium="#006d2c"
+let g:read_guibg_hard="#ff6666"
+let g:read_guibg_bloat="#ff0000"
+
+" coloring -- console
+let g:read_ctermfg = "Black"
+let g:read_ctermbg_dumb="LightGreen"
+let g:read_ctermbg_easy="Green"
+let g:read_ctermbg_medium="DarkGreen"
+let g:read_ctermbg_hard="LightMagenta"
+let g:read_ctermbg_bloat="Red"
+
 " setting highlight groups
 fun! SetHlGroups()
-  execute "highlight hlDumb guifg=#000000 guibg=#41ae76"
-  execute "highlight hlEasy guifg=#000000 guibg=#238b45"
-  execute "highlight hlMedium guifg=#000000 guibg=#006d2c"
-  execute "highlight hlHard guifg=#000000 guibg=#ff6666"
-  execute "highlight hlBloat guifg=#000000 guibg=#ff0000"
+  execute "highlight hlDumb guifg="g:read_guifg " guibg="g:read_guibg_dumb " ctermfg="g:read_ctermfg "ctermbg="g:read_ctermbg_dumb ""
+  execute "highlight hlEasy guifg="g:read_guifg " guibg="g:read_guibg_easy "ctermfg="g:read_ctermfg "ctermbg="g:read_ctermbg_easy ""
+  execute "highlight hlMedium guifg="g:read_guifg " guibg="g:read_guibg_medium "ctermfg="g:read_ctermfg "ctermbg="g:read_ctermbg_medium ""
+  execute "highlight hlHard guifg="g:read_guifg " guibg="g:read_guibg_hard "ctermfg="g:read_ctermfg "ctermbg="g:read_ctermbg_hard ""
+  execute "highlight hlBloat guifg="g:read_guifg " guibg="g:read_guibg_bloat "ctermfg="g:read_ctermfg "ctermbg="g:read_ctermbg_bloat ""
 endf
 
 " iterate lines for sign placement
