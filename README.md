@@ -65,6 +65,10 @@ let g:read_ctermbg_hard="LightMagenta"
 let g:read_ctermbg_bloat="Red"
 ```
 
+Readability column in action in GUI and CLI (sentences are from an [excellent essay](https://medium.com/@hughmcguire/why-can-t-we-read-anymore-503c38c131fe#.svxaye4p4) by Hugh McGuire):
+
+![](screenshots/example.png "Readability collumn in action")
+
 ## Notes & known issues
 
 * readability metrics provided by odyssey are designed for English only
