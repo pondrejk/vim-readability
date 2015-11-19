@@ -69,6 +69,18 @@ Readability column in action in GUI and CLI (sentences are from an [excellent es
 
 ![](screenshots/example.png "Readability collumn in action")
 
+To blacklist selected words from calculation, enable the following variable in your .vimrc:
+
+```Vim
+let g:readability_blacklist_on = 1
+```
+
+By default, plug-in searches for the blacklist at .vim/bundle/vim-readability/blacklist.txt", you can change the path by setting the following variable in your .vimrc (default shown):
+
+```Vim
+let g:readability_blacklist_path = ".vim/bundle/vim-readability/blacklist.txt"
+```
+
 ## Notes & known issues
 
 * readability metrics provided by odyssey are designed for English only
@@ -76,5 +88,5 @@ Readability column in action in GUI and CLI (sentences are from an [excellent es
 
 ## TODO
 
-* implement other readability metrics provided by odyssey
+* implement and other readability metrics provided by odyssey
 * be friends with markdown and asciidoc (odyssey does xml parsing by default)

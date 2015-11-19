@@ -20,7 +20,17 @@ let g:read_loaded = 1
 
 " sign column active?
 let gutterOn = 0
+
+" redraw on save
 let g:readability_onsave = 0
+
+" enable_blacklist
+let g:readability_blacklist_on = 0
+let g:readability_blacklist_path = ".vim/bundle/vim-readability/blacklist.txt"
+let g:readability_blacklist = []
+if g:readability_blacklist_on
+  let g:readability_blacklist = CompileBlacklist()
+end
 
 " coloring -- GUI
 let g:read_guifg = "#000000"
@@ -125,6 +135,13 @@ fun! FleschKincaidGrade(inTxt)
 require 'odyssey'
 
 inTxt = VIM::evaluate("a:inTxt")
+blacklist = VIM::evaluate("g:readability_blacklist")
+
+unless blacklist.empty? then
+   tmpArray = inTxt.scan(/[\w'-]+|[[:punct:]]+/)
+   inTxt = tmpArray.delete_if{|x| blacklist.include?(x.downcase)}.join(' ')
+end 
+
 report = Odyssey.Flesch_kincaid_GL(inTxt, true)
 
 if report["string_length"] == 0 or report["sentence_count"] == 0 or report["syllable_count"] == 0 or report["letter_count"] == 0 or report["word_count"] == 0 or report["average_words_per_sentence"] == 1 then
@@ -142,12 +159,17 @@ VIM.command("let g:funreturn="+String(score))
 EOF
 endf
 
+" load blacklist
+fun! CompileBlacklist()
+  return readfile(g:readability_blacklist_path)
+endf
+
 " user commands
 command! ReadGradeOn call ReadGradeEnable()
 command! ReadGradeOff call ReadGradeDisable()
 command! ReadGradeToggle call ReadGradeToggle()
 
-" autorun on save -- how to turn off by default?
+" autorun on save
 if g:readability_onsave
   autocmd! BufWritePost,FileChangedShellPost * 
         \  if g:gutterOn == 1 |
