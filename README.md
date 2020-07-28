@@ -90,6 +90,7 @@ let g:readability_blacklist_path = ".vim/bundle/vim-readability/blacklist.txt"
 
 * readability metrics provided by odyssey are designed for English only
 * right now, there is just one sign column in Vim, so if you use git-gutter or similar plug-in, vim-readability will overwrite signs made by these plug-ins, sorry
+* If you receive the error message `E319: Sorry, the command is not available in this version:   ruby << EOF` it is because you are not using a vim installation with support for `+ruby`, to resolve please see the [dependencies section](#vim-ruby-feature-support).
 
 ## TODO
 
