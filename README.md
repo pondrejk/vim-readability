@@ -5,7 +5,12 @@ A Vim plug-in that calculates the [Flesch-Kincaid readability grade](https://en.
 
 ## Dependencies
 
+### Ruby
 Plug-in requires the [odyssey](<https://github.com/cameronsutter/odyssey>) ruby library for calculating the index.
+
+### Vim +ruby Feature Support
+Vim requires that it is compiled with support for `+ruby` you can see if your vim supports it by running :version; 
+On Ubuntu it may require that you install `vim-gtk` and start it with `vim.gtk`
 
 ## Installation
 
