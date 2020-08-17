@@ -5,7 +5,12 @@ A Vim plug-in that calculates the [Flesch-Kincaid readability grade](https://en.
 
 ## Dependencies
 
+### Ruby
 Plug-in requires the [odyssey](<https://github.com/cameronsutter/odyssey>) ruby library for calculating the index.
+
+### Vim +ruby Feature Support
+Vim requires that it is compiled with support for `+ruby` you can see if your vim supports it by running :version; 
+On Ubuntu it may require that you install `vim-gtk` and start it with `vim.gtk`
 
 ## Installation
 
@@ -85,6 +90,7 @@ let g:readability_blacklist_path = ".vim/bundle/vim-readability/blacklist.txt"
 
 * readability metrics provided by odyssey are designed for English only
 * right now, there is just one sign column in Vim, so if you use git-gutter or similar plug-in, vim-readability will overwrite signs made by these plug-ins, sorry
+* If you receive the error message `E319: Sorry, the command is not available in this version:   ruby << EOF` it is because you are not using a vim installation with support for `+ruby`, to resolve please see the [dependencies section](#vim-ruby-feature-support).
 
 ## TODO
 
